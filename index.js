@@ -1,7 +1,7 @@
 const Circle=require("./lib/Circle")
 const inquirer=require("inquirer")
 const fs=require("fs")
-cons Square=require("./lib/Square")
+const Square=require("./lib/Square")
 
 inquirer
 .create([])
