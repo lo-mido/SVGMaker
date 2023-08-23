@@ -7,48 +7,58 @@ const fs = require("fs");
 inquirer
   .prompt([
     {
-      type: "input",
-      message: "Enter SVG Text:",
-      name: "Text",
+      type: "list",
+      message: "Choose Shape",
+      name: "shape",
+      choices: ["Circle", "Square", "Triangle"],
     },
     {
       type: "list",
-      message: "Enter Text Color",
-      name: "textColor",
-      choices: ["black", "white", "red", "green", "yellow"],
-    },
-    {
-      type: "list",
-      message: "Enter Shape Color",
+      message: "Choose Shape Color",
       name: "shapeColor",
       choices: ["black", "white", "red", "green", "yellow"],
     },
     {
+      type: "input",
+      message: "Enter Text (1-3 characters)",
+      name: "text",
+      validate: (textValue) =>
+        textValue.length <= 3 ||
+        "Your text must be 1-3 characters, please retry."
+    },
+    {
       type: "list",
-      message: "Enter Text Color",
+      message: "Choose Text Color",
       name: "textColor",
       choices: ["black", "white", "red", "green", "yellow"],
     },
   ])
   //  research how to make the text three characters via validate function
   .then((response) => {
-    if (response.shape === "circle") {
+    console.log(response)
+    if (response.shape === "Circle") {
       const circle = new Circle();
       circle.setColor(response.textColor);
       circle.setText(response.text);
-      circle.setShapeColor(response.setShapeColor);
-      fs.writeFile("./examples/logo.svg",circle.render(),(error) => {
-        console.log("Generated logo.svg"); )
-     );
-    } else if (response.shape === "square") {
-      const Square = new Square();
+      circle.setShapeColor(response.shapeColor);
+      fs.writeFile("./examples/logo.svg", circle.render(), (error) => {
+        console.log("Generated logo.svg");
+      });
+    } else if (response.shape === "Square") {
+      const square = new Square();
       square.setColor(response.textColor);
       square.setText(response.text);
-      square.setShapeColor(response.setShapeColor);
-    } else if (response.shape === "triangle") {
+      square.setShapeColor(response.shapeColor);
+      fs.writeFile("./examples/logo.svg", square.render(), (error) => {
+        console.log("Generated logo.svg");
+      });
+    } else if (response.shape === "Triangle") {
       const triangle = new Triangle();
       triangle.setColor(response.textColor);
       triangle.setText(response.text);
-      triangle.setShapeColor(response.setShapeColor);
+      triangle.setShapeColor(response.shapeColor);
+      fs.writeFile("./examples/logo.svg", triangle.render(), (error) => {
+        console.log("Generated logo.svg");
+      });
     }
- 
+  });
