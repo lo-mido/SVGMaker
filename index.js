@@ -1,31 +1,54 @@
-const Circle=require("./lib/Circle")
-const inquirer=require("inquirer")
-const fs=require("fs")
-const Square=require("./lib/Square")
+const Circle = require("./lib/Circle");
+const Square = require("./lib/Square");
+const Triangle = require("./lib/Triangle");
 
+const inquirer = require("inquirer");
+const fs = require("fs");
 inquirer
-.create([])
-type: "input"
-message: "Enter SVG Text"
-name: "text"
-;{
-    type: "list",
-    message: "Enter Text Color"
-    Choices: ["black", "blue", "green", "red", "yellow", ]
-}, 
-{
-    type: "list",
-    message: "Enter Shape Color"
-    Choice: ["Circle", "Triangle", "Square"]
-
-}
-
-
-.then(Response =>{
-if (response.shape==="circle"{
-    const circle=new Circle();
-    circle.setColor(response.textColor)
-    circle.setText(response.text)
-    circle.setShapeColor
-}
-});
+  .prompt([
+    {
+      type: "input",
+      message: "Enter SVG Text:",
+      name: "Text",
+    },
+    {
+      type: "list",
+      message: "Enter Text Color",
+      name: "textColor",
+      choices: ["black", "white", "red", "green", "yellow"],
+    },
+    {
+      type: "list",
+      message: "Enter Shape Color",
+      name: "shapeColor",
+      choices: ["black", "white", "red", "green", "yellow"],
+    },
+    {
+      type: "list",
+      message: "Enter Text Color",
+      name: "textColor",
+      choices: ["black", "white", "red", "green", "yellow"],
+    },
+  ])
+  //  research how to make the text three characters via validate function
+  .then((response) => {
+    if (response.shape === "circle") {
+      const circle = new Circle();
+      circle.setColor(response.textColor);
+      circle.setText(response.text);
+      circle.setShapeColor(response.setShapeColor);
+      fs.writeFile("./examples/logo.svg",circle.render(),(error) => {
+        console.log("Generated logo.svg"); )
+     );
+    } else if (response.shape === "square") {
+      const Square = new Square();
+      square.setColor(response.textColor);
+      square.setText(response.text);
+      square.setShapeColor(response.setShapeColor);
+    } else if (response.shape === "triangle") {
+      const triangle = new Triangle();
+      triangle.setColor(response.textColor);
+      triangle.setText(response.text);
+      triangle.setShapeColor(response.setShapeColor);
+    }
+ 
